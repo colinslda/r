@@ -26,7 +26,7 @@ function updatePiece(pieceId, updatedPieceData) {
     let pieces = getAllPieces();
     pieces = pieces.map(piece => {
         if (piece.id === pieceId) {
-            return updatedPieceData; // Remplacer avec les nouvelles données
+            return updatedPieceData;
         }
         return piece;
     });
@@ -35,19 +35,19 @@ function updatePiece(pieceId, updatedPieceData) {
 
 function deletePiece(pieceId) {
     let pieces = getAllPieces();
-    pieces = pieces.filter(piece => piece.id !== pieceId); // Filtrer pour exclure le morceau à supprimer
+    pieces = pieces.filter(piece => piece.id !== pieceId);
     saveAllPieces(pieces);
 }
 
 function addRepetitionNote(pieceId, noteText) {
     let piece = getPiece(pieceId);
     if (piece) {
-        piece.notes = piece.notes || []; // Initialiser le tableau de notes si nécessaire
+        piece.notes = piece.notes || [];
         piece.notes.push({
-            date: new Date().toISOString(), // Date/heure de la note
+            date: new Date().toISOString(),
             text: noteText
         });
-        updatePiece(pieceId, piece); // Mettre à jour le morceau avec les nouvelles notes
+        updatePiece(pieceId, piece);
     }
 }
 
