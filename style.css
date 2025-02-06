@@ -1,0 +1,242 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom, #e0e0e0, #b2b2b2); /* Dégradé gris clair vers gris moyen pour le fond */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Pour que le footer reste en bas même si peu de contenu */
+}
+
+header {
+    background: linear-gradient(to right, #6a5acd, #8a2be2); /* Dégradé violet pour l'en-tête */
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+    border-radius: 0 0 15px 15px; /* Bords arrondis en bas */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Ombre légère */
+}
+
+main {
+    flex-grow: 1; /* Main prend l'espace restant */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Espace entre les sections */
+}
+
+section {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; /* Animations douces */
+}
+
+section.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none; /* Empêche les interactions quand la section est cachée */
+    display: none; /* Retire de la mise en page, alternative à opacity:0 + pointer-events:none */
+}
+
+h2 {
+    color: #6a5acd; /* Couleur violette pour les titres de section */
+    margin-top: 0;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 150px;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px; /* Boutons arrondis */
+    color: white;
+    background: linear-gradient(to right, #6a5acd, #8a2be2); /* Dégradé violet pour les boutons */
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Animation au survol */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+button:hover {
+    transform: translateY(-2px); /* Léger déplacement vers le haut au survol */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.btn-ajouter, .btn-sauvegarder {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+}
+
+footer {
+    background: linear-gradient(to right, #e6e6fa, #f0f8ff); /* Dégradé bleu/blanc pour le footer */
+    padding: 15px 0;
+    border-radius: 15px 15px 0 0; /* Bords arrondis en haut */
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1); /* Ombre légère en haut */
+}
+
+footer nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    color: #555;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-btn.active, .nav-btn:hover {
+    background-color: rgba(106, 90, 205, 0.1); /* Violet clair au survol/actif */
+    color: #6a5acd;
+    font-weight: bold;
+}
+
+#morceaux-liste {
+    list-style: none;
+    padding: 0;
+}
+
+#morceaux-liste li {
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease-in-out;
+}
+
+#morceaux-liste li:hover {
+    transform: scale(1.02); /* Léger zoom au survol des éléments de liste */
+}
+
+#morceaux-liste li span {
+    flex-grow: 1;
+    margin-right: 15px;
+}
+
+#morceaux-liste li .actions-morceau button {
+    background: none;
+    color: #777;
+    padding: 8px 12px;
+    margin-left: 5px;
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: none; /* Supprime l'ombre standard des boutons d'action */
+}
+
+#morceaux-liste li .actions-morceau button:hover {
+    background-color: rgba(0,0,0,0.05); /* Gris très clair au survol des boutons d'action */
+    transform: none; /* Empêche le déplacement au survol des boutons d'action */
+}
+
+/* ... Styles CSS précédents ... */
+
+.autocomplete {
+    position: relative; /* Important pour positionner la liste d'autocomplétion */
+}
+
+.autocomplete-list {
+    position: absolute;
+    top: 100%; /* Positionnée juste en dessous de l'input */
+    left: 0;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    z-index: 10; /* Pour être au-dessus des autres éléments */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Cachée par défaut */
+}
+
+.autocomplete-list.show {
+    display: block; /* Affichée quand la classe 'show' est ajoutée */
+}
+
+.autocomplete-list li {
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.autocomplete-list li:hover {
+    background-color: #f0f0f0;
+}
+
+.autocomplete-list li.selected {
+    background-color: #e0e0e0; /* Style pour l'élément sélectionné (au clavier) */
+}
+
+
+#tri-morceaux {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alignement à droite */
+    margin-bottom: 10px;
+}
+
+#tri-morceaux label {
+    margin-right: 10px;
+    color: #555;
+}
+
+#tri-morceaux select {
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+.btn-annuler {
+    background: #ccc; /* Couleur grise pour le bouton Annuler */
+    background: linear-gradient(to right, #a9a9a9, #c0c0c0); /* Dégradé gris pour le bouton Annuler */
+    margin-left: 10px;
+    color: white;
+}
+
+.btn-annuler:hover {
+    background: linear-gradient(to right, #808080, #a9a9a9); /* Dégradé gris plus foncé au survol */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.hidden {
+    display: none !important; /* Utilisation de !important pour forcer la priorité */
+}
