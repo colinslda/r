@@ -1,40 +1,46 @@
 // js/ui.js
 
-function displayPieceList(pieces) {
-    const pieceListElement = document.getElementById('piece-list');
-    pieceListElement.innerHTML = '';
 
-    if (pieces.length === 0) {
-        pieceListElement.innerHTML = '<p>Aucun morceau ajouté pour le moment.</p>';
-        return;
-    }
+const pieceCategories = ["Concerto", "Sonate", "Pièces solo", "Etudes/Caprices", "Techniques"]; // Définir l'ordre des catégories
 
-    pieces.forEach(piece => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            <div class="piece-item-info">
-                <h3>${piece.titre}</h3>
-                <p>Compositeur: ${piece.compositeur || 'Inconnu'}</p>
-                <p>Style: ${piece.style || 'Non spécifié'}</p>
-            </div>
-            <div class="piece-actions">
-                <button class="edit-piece" data-id="${piece.id}">Modifier</button>
-                <button class="delete-piece" data-id="${piece.id}">Supprimer</button>
-                <button class="add-notes-piece" data-id="${piece.id}">Notes</button>
-            </div>
-        `;
-        pieceListElement.appendChild(listItem);
+function displayPieceListByCategory(pieces) { // CHANGEMENT : Fonction pour afficher par catégorie
+    pieceCategories.forEach(category => { // Iterer sur les catégories définies
+        const categoryPieces = pieces.filter(piece => piece.category === category); // Filtrer les morceaux par catégorie
+        const categoryListElement = document.getElementById(getCategoryId(category)); // Obtenir l'élément UL pour cette catégorie
+        categoryListElement.innerHTML = ''; // Vider la liste précédente de cette catégorie
+
+        if (categoryPieces.length === 0) {
+            categoryListElement.innerHTML = '<p>Aucun morceau ajouté dans cette catégorie pour le moment.</p>';
+        } else {
+            categoryPieces.forEach(piece => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `
+                    <div class="piece-item-info">
+                        <h3><strong>${piece.compositeur || 'Inconnu'}</strong></h3>  <p>${piece.titre}</p> </div>
+                    <div class="piece-actions">
+                        <button class="edit-piece" data-id="${piece.id}">Modifier</button>
+                        <button class="delete-piece" data-id="${piece.id}">Supprimer</button>
+                        <button class="add-notes-piece" data-id="${piece.id}">Notes</button>
+                    </div>
+                `;
+                categoryListElement.appendChild(listItem);
+            });
+        }
     });
 
-    // Ajouter les listeners d'événements après avoir ajouté les éléments à la liste (délégation d'événements)
-    attachListEventListeners();
+    attachListEventListeners(); // Attacher les listeners après avoir rendu toutes les listes
+}
+
+
+function getCategoryId(categoryName) { // Fonction utilitaire pour obtenir l'ID de l'UL de catégorie
+    return `piece-list-${categoryName.toLowerCase().replace(/[^a-z]+/g, '-')}`; // Générer un ID basé sur le nom de catégorie
 }
 
 
 function attachListEventListeners() {
-    const pieceListElement = document.getElementById('piece-list');
+    const pieceCategorySection = document.getElementById('piece-category-section'); // CHANGEMENT : Listener sur la section catégorie entière
 
-    pieceListElement.addEventListener('click', function(event) {
+    pieceCategorySection.addEventListener('click', function(event) { // CHANGEMENT : Listener sur la section catégorie entière
         if (event.target.classList.contains('edit-piece')) {
             const pieceId = event.target.dataset.id;
             editPieceForm(pieceId);
@@ -70,7 +76,7 @@ function editPieceForm(pieceId) {
         document.getElementById('piece-id').value = piece.id;
         document.getElementById('piece-title').value = piece.titre;
         document.getElementById('piece-composer').value = piece.compositeur || '';
-        document.getElementById('piece-style').value = piece.style || '';
+        document.getElementById('piece-category').value = piece.category || ''; // CHANGEMENT : Remplir le champ catégorie
         document.getElementById('piece-reference-link').value = piece.referenceLink || '';
         document.getElementById('cancel-piece-form').style.display = 'inline-block';
         document.getElementById('piece-form-section').scrollIntoView({behavior: 'smooth'});
