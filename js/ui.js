@@ -62,10 +62,20 @@ function attachListEventListeners() {
 
 
 function showPieceFormSection() {
-    document.getElementById('piece-form-section').style.display = 'block';
-    document.getElementById('add-piece-button-section').style.display = 'none';
-    document.getElementById('piece-form-section').scrollIntoView({behavior: 'smooth'});
-    document.getElementById('cancel-piece-form').style.display = 'inline-block';
+    console.log("➡️➡️➡️ Fonction showPieceFormSection() appelée ! ⬅️⬅️⬅️"); // AJOUTER CETTE LIGNE AU DÉBUT
+
+    const formSection = document.getElementById('piece-form-section'); // Récupération de l'élément
+    const addButtonSection = document.getElementById('add-piece-button-section'); // Récupération de l'autre élément
+    const cancelButton = document.getElementById('cancel-piece-form'); // Récupération du bouton Annuler
+
+    console.log("formSection:", formSection); // AJOUTER CETTE LIGNE
+    console.log("addButtonSection:", addButtonSection); // AJOUTER CETTE LIGNE
+    console.log("cancelButton:", cancelButton); // AJOUTER CETTE LIGNE
+
+    formSection.style.display = 'block';
+    addButtonSection.style.display = 'none';
+    formSection.scrollIntoView({behavior: 'smooth'});
+    cancelButton.style.display = 'inline-block';
 }
 
 function hidePieceFormSection() {
