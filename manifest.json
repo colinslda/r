@@ -1,6 +1,6 @@
 {
-  "name": "**DACAPO**", <--- CHANGEMENT ICI
-  "short_name": "**DACAPO**", <--- CHANGEMENT ICI
+  "name": "DACAPO",
+  "short_name": "DACAPO",
   "description": "Gérez vos séances de répétition musicale avec cette PWA.",
   "start_url": ".",
   "display": "standalone",
