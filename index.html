@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>**DACAPO**</title> <--- CHANGEMENT ICI
+    <title>DACAPO</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
@@ -11,15 +11,15 @@
 </head>
 <body>
     <header>
-        <h1>**DACAPO**</h1> <--- CHANGEMENT ICI
+        <h1>DACAPO</h1>
     </header>
 
     <main>
-        <section id="add-piece-button-section"> <--- AJOUT DE SECTION POUR BOUTON
-            <button id="add-piece-button">Ajouter une pièce</button> <--- BOUTON AJOUTER UNE PIÈCE
+        <section id="add-piece-button-section">
+            <button id="add-piece-button">Ajouter une pièce</button>
         </section>
 
-        <section id="piece-form-section" style="display:none;"> <--- MASQUAGE INITIAL DU FORMULAIRE
+        <section id="piece-form-section" style="display:none;">
             <h2>Ajouter un morceau</h2>
             <form id="piece-form">
                 <input type="hidden" id="piece-id">
@@ -41,11 +41,11 @@
                         <option value="Pop">Pop</option>
                         <option value="Autre">Autre</option>
                     </select>
-                    <input type="text" id="custom-style" placeholder="Style personnalisé (si Autre)" style="display: none;"> <--- STYLE PERSONNALISÉ CACHÉ PAR DÉFAUT
+                    <input type="text" id="custom-style" placeholder="Style personnalisé (si Autre)" style="display: none;">
                 </div>
                 <div>
-                    <label for="piece-reference-link">Lien d'écoute (YouTube, Apple Music):</label> <--- CHANGEMENT DE LABEL
-                    <input type="url" id="piece-reference-link" placeholder="URL YouTube ou Apple Music"> <--- CHANGEMENT TYPE INPUT et PLACEHOLDER
+                    <label for="piece-reference-link">Lien d'écoute (YouTube, Apple Music):</label>
+                    <input type="url" id="piece-reference-link" placeholder="URL YouTube ou Apple Music">
                 </div>
                 <button type="submit">Enregistrer le morceau</button>
                 <button type="button" id="cancel-piece-form" style="display:none;">Annuler</button>
@@ -74,7 +74,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 DACAPO</p> <--- CHANGEMENT ICI
+        <p>&copy; 2024 DACAPO</p>
     </footer>
 
     <script src="js/pieces.js"></script>
