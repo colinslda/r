@@ -4,11 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM chargé, application initialisée.');
     loadPieceList();
 
-// Événements pour le bouton "Ajouter une pièce"
-    document.getElementById('add-piece-button').addEventListener('click', function() { // Ajout d'une fonction anonyme
-        console.log("Le bouton 'Ajouter une pièce' a été cliqué !"); // AJOUTER CETTE LIGNE
-        showPieceFormSection();
-    });
+    // Événements pour le bouton "Ajouter une pièce"
+    document.getElementById('add-piece-button').addEventListener('click', showPieceFormSection);
 
     // Événements pour le formulaire d'ajout/modification
     const pieceForm = document.getElementById('piece-form');
