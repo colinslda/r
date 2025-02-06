@@ -2,77 +2,83 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Répétition Musicale PWA</title>
+    <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="style.css">
-    <title>Répète App</title>
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
+    <meta name="theme-color" content="#3498db">
 </head>
 <body>
     <header>
-        <h1>Répète App</h1>
+        <h1>Répétition Musicale</h1>
     </header>
 
     <main>
-        <section id="ajout-morceau">
+        <section id="piece-form-section">
             <h2>Ajouter / Modifier un morceau</h2>
-            <form id="form-morceau">
-                <input type="hidden" id="morceau-index" name="morceau-index" value="-1">
-                <div class="input-group">
-                    <label for="titre">Titre:</label>
-                    <input type="text" id="titre" name="titre" required>
+            <form id="piece-form">
+                <input type="hidden" id="piece-id">
+                <div>
+                    <label for="piece-title">Titre *:</label>
+                    <input type="text" id="piece-title" required>
                 </div>
-                <div class="input-group">
-                    <label for="compositeur">Compositeur:</label>
-                    <div class="autocomplete">
-                        <input type="text" id="compositeur" name="compositeur" autocomplete="off">
-                        <ul class="autocomplete-list" id="compositeur-autocomplete-list"></ul>
-                    </div>
+                <div>
+                    <label for="piece-composer">Compositeur:</label>
+                    <input type="text" id="piece-composer">
                 </div>
-                <div class="input-group">
-                    <label for="style">Style:</label>
-                    <div class="autocomplete">
-                        <input type="text" id="style" name="style" autocomplete="off">
-                        <ul class="autocomplete-list" id="style-autocomplete-list"></ul>
-                    </div>
+                <div>
+                    <label for="piece-style">Style musical:</label>
+                    <select id="piece-style">
+                        <option value="">-- Sélectionner un style --</option>
+                        <option value="Classique">Classique</option>
+                        <option value="Jazz">Jazz</option>
+                        <option value="Rock">Rock</option>
+                        <option value="Pop">Pop</option>
+                        <option value="Autre">Autre</option>
+                    </select>
+                    <input type="text" id="custom-style" placeholder="Style personnalisé (si Autre)">
                 </div>
-                <button type="submit" class="btn-ajouter" id="btn-ajouter-modifier">Ajouter morceau</button>
-                <button type="button" class="btn-annuler hidden" id="btn-annuler-modifier">Annuler</button>
+                <div>
+                    <label for="piece-tempo">Tempo (BPM):</label>
+                    <input type="number" id="piece-tempo" min="20" max="300">
+                </div>
+                <div>
+                    <label for="piece-partition">Partition:</label>
+                    <input type="file" id="piece-partition" accept="application/pdf, image/*">
+                </div>
+                <button type="submit">Enregistrer le morceau</button>
+                <button type="button" id="cancel-piece-form" style="display:none;">Annuler</button>
             </form>
         </section>
 
-        <section id="liste-morceaux">
+        <section id="piece-list-section">
             <h2>Liste des morceaux</h2>
-            <div id="tri-morceaux">
-                <label for="tri-selection">Trier par:</label>
-                <select id="tri-selection">
-                    <option value="aucun">Aucun tri</option>
-                    <option value="titre">Titre</option>
-                    <option value="compositeur">Compositeur</option>
-                    <option value="style">Style</option>
-                </select>
+            <div id="piece-list-controls">
+                <button id="sort-by-title">Trier par Titre</button>
+                <button id="sort-by-composer">Trier par Compositeur</button>
+                <button id="sort-by-style">Trier par Style</button>
             </div>
-            <ul id="morceaux-liste">
-            </ul>
+            <ul id="piece-list">
+                </ul>
         </section>
 
-        <section id="notes-repetition" class="hidden">
-            <h2 id="notes-titre-morceau">Notes de répétition pour [Nom du morceau]</h2>
-            <textarea id="notes" placeholder="Ajouter des notes sur la répétition..."></textarea>
-            <button id="btn-sauvegarder-notes" class="btn-sauvegarder">Sauvegarder les notes</button>
-            <button id="btn-retour-liste" class="btn-annuler hidden">Retour à la liste des morceaux</button>
+        <section id="repetition-notes-section" style="display:none;">
+            <h2>Notes de Répétition pour <span id="notes-piece-title"></span></h2>
+            <textarea id="repetition-notes" placeholder="Ajouter vos notes ici..."></textarea>
+            <div id="repetition-notes-actions">
+                <button id="save-notes">Enregistrer les notes</button>
+                <button id="cancel-notes">Fermer</button>
+            </div>
         </section>
     </main>
 
     <footer>
-        <nav>
-            <button id="btn-liste" class="nav-btn active">Morceaux</button>
-            <button id="btn-notes" class="nav-btn">Notes</button>
-        </nav>
+        <p>&copy; 2024 Mon App de Répétition Musicale</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="js/pieces.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
