@@ -1,4 +1,4 @@
-/* style.css - DESIGN AMÉLIORÉ */
+/* style.css - DESIGN AMÉLIORÉ (Boutons "Modifier, Supprimer, Notes") */
 
 /* Importation des polices Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500;600&display=swap');
@@ -74,6 +74,32 @@ section h2 {
     display: inline-block; /* Ajustement pour le soulignement */
 }
 
+/* Section Bouton "Ajouter une pièce" */
+#add-piece-button-section {
+    text-align: center; /* Centrer le bouton */
+    margin-bottom: 2em; /* Marge en dessous du bouton */
+}
+
+#add-piece-button {
+    background-color: var(--success-color); /* Couleur verte pour le bouton "Ajouter une pièce" */
+    color: var(--white);
+    border: none;
+    padding: 1.2em 2.5em; /* Plus grand et plus visible */
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); /* Ombre un peu plus marquée */
+}
+
+#add-piece-button:hover {
+    background-color: #27ae60; /* Vert légèrement plus foncé au survol */
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); /* Ombre plus importante au survol */
+}
+
+
 /* Formulaire - Style amélioré */
 #piece-form label {
     display: block;
@@ -86,6 +112,7 @@ section h2 {
 #piece-form input[type="number"],
 #piece-form select,
 #piece-form input[type="file"],
+#piece-form input[type="url"], /* Style pour le nouveau champ URL */
 #repetition-notes {
     width: 100%;
     padding: 1em; /* Padding plus généreux pour les inputs */
@@ -103,6 +130,7 @@ section h2 {
 #piece-form input[type="number"]:focus,
 #piece-form select:focus,
 #piece-form input[type="file"]:focus,
+#piece-form input[type="url"]:focus, /* Focus pour le nouveau champ URL */
 #repetition-notes:focus {
     border-color: var(--primary-blue); /* Bordure bleue au focus */
     outline: none; /* Supprimer l'outline par défaut au focus */
@@ -168,45 +196,60 @@ section h2 {
 
 #piece-list li {
     background-color: var(--white);
-    padding: 1.5em; /* Padding plus important pour les éléments de liste */
-    margin-bottom: 0.8em; /* Marge légèrement réduite entre les éléments */
-    border-radius: 10px; /* Coins légèrement moins arrondis pour les éléments de liste */
+    padding: 1.5em;
+    margin-bottom: 0.8em;
+    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Ombre légère pour les éléments de liste */
-    border-left: 5px solid var(--primary-blue); /* Bande de couleur à gauche */
-    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out; /* Transition douce */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    border-left: 5px solid var(--primary-blue);
+    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
 #piece-list li:hover {
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12); /* Ombre plus importante au survol des éléments de liste */
-    transform: translateX(2px); /* Léger décalage vers la droite au survol */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+    transform: translateX(2px);
 }
 
 
 .piece-item-info h3 {
-    margin: 0 0 0.5em 0; /* Marge sous le titre */
-    font-size: 1.4em; /* Titres des morceaux plus grands */
-    color: var(--primary-blue); /* Titre en bleu primaire */
-    font-family: 'Montserrat', sans-serif; /* Police pour les titres de morceaux */
+    margin: 0 0 0.5em 0;
+    font-size: 1.4em;
+    color: var(--primary-blue);
+    font-family: 'Montserrat', sans-serif;
 }
 
 .piece-item-info p {
     margin: 0.3em 0;
-    color: #555; /* Couleur de texte secondaire plus douce */
+    color: #555;
     font-size: 1em;
 }
 
 .piece-actions button {
-    margin-left: 0.8em; /* Marge plus importante entre les boutons d'action */
-    background-color: var(--accent-color); /* Couleur d'accent pour les actions importantes */
-    font-size: 0.95em; /* Légèrement plus petits pour les boutons d'action de liste */
-    padding: 0.8em 1.5em; /* Padding ajusté pour les boutons d'action de liste */
+    margin-left: 0.8em;
+    /* background-color: var(--accent-color);  SUPPRESSION DE LA COULEUR D'ACCENT SPÉCIFIQUE */
+    /* font-size: 0.95em;  SUPPRESSION DE LA TAILLE DE POLICE SPÉCIFIQUE */
+    /* padding: 0.8em 1.5em;  SUPPRESSION DU PADDING SPÉCIFIQUE */
+    /* Réutilisation des styles de boutons globaux */
+    background-color: var(--primary-blue); /* Réutiliser la couleur primaire */
+    color: var(--white);
+    border: none;
+    padding: 1em 2em; /* Réutiliser padding global boutons */
+    border-radius: 30px; /* Réutiliser border-radius global boutons */
+    cursor: pointer;
+    font-size: 1.1em; /* Réutiliser font-size global boutons */
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    margin-right: 0.6em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .piece-actions button:hover {
-    background-color: #e05a4c; /* Assombrir légèrement la couleur d'accent au survol */
+    background-color: var(--secondary-violet); /* Réutiliser couleur hover globale */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -258,6 +301,7 @@ footer {
     #piece-form input[type="number"],
     #piece-form select,
     #piece-form input[type="file"],
+    #piece-form input[type="url"],
     #repetition-notes {
         padding: 0.9em;
         margin-bottom: 1.2em;
