@@ -32,16 +32,15 @@
                     <input type="text" id="piece-composer">
                 </div>
                 <div>
-                    <label for="piece-style">Style musical:</label>
-                    <select id="piece-style">
-                        <option value="">-- Sélectionner un style --</option>
-                        <option value="Classique">Classique</option>
-                        <option value="Jazz">Jazz</option>
-                        <option value="Rock">Rock</option>
-                        <option value="Pop">Pop</option>
-                        <option value="Autre">Autre</option>
+                    <label for="piece-category">Catégorie de l'œuvre:</label>
+                    <select id="piece-category">
+                        <option value="">-- Sélectionner une catégorie --</option>
+                        <option value="Concerto">Concerto</option>
+                        <option value="Sonate">Sonate</option>
+                        <option value="Pièces solo">Pièces solo</option>
+                        <option value="Etudes/Caprices">Etudes/Caprices</option>
+                        <option value="Techniques">Techniques</option>
                     </select>
-                    <input type="text" id="custom-style" placeholder="Style personnalisé (si Autre)" style="display: none;">
                 </div>
                 <div>
                     <label for="piece-reference-link">Lien d'écoute (YouTube, Apple Music):</label>
@@ -52,15 +51,34 @@
             </form>
         </section>
 
-        <section id="piece-list-section">
-            <h2>Liste des morceaux</h2>
-            <div id="piece-list-controls">
-                <button id="sort-by-title">Trier par Titre</button>
-                <button id="sort-by-composer">Trier par Compositeur</button>
-                <button id="sort-by-style">Trier par Style</button>
-            </div>
-            <ul id="piece-list">
-            </ul>
+        <section id="piece-category-section" style="display:block;">
+            <h2>Répertoire</h2>
+
+            <section class="category-section" id="concerto-section">
+                <h3>Concerto</h3>
+                <ul class="piece-list" id="concerto-list"></ul>
+            </section>
+
+            <section class="category-section" id="sonate-section">
+                <h3>Sonate</h3>
+                <ul class="piece-list" id="sonate-list"></ul>
+            </section>
+
+            <section class="category-section" id="pieces-solo-section">
+                <h3>Pièces solo</h3>
+                <ul class="piece-list" id="pieces-solo-list"></ul>
+            </section>
+
+            <section class="category-section" id="etudes-caprices-section">
+                <h3>Etudes/Caprices</h3>
+                <ul class="piece-list" id="etudes-caprices-list"></ul>
+            </section>
+
+            <section class="category-section" id="techniques-section">
+                <h3>Techniques</h3>
+                <ul class="piece-list" id="techniques-list"></ul>
+            </section>
+
         </section>
 
         <section id="repetition-notes-section" style="display:none;">
