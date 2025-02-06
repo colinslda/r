@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="icon.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <title>Répète App</title>
+</head>
+<body>
+    <header>
+        <h1>Répète App</h1>
+    </header>
+
+    <main>
+        <section id="ajout-morceau">
+            <h2>Ajouter / Modifier un morceau</h2> <form id="form-morceau">
+                <input type="hidden" id="morceau-index" name="morceau-index" value="-1"> <div class="input-group">
+                    <label for="titre">Titre:</label>
+                    <input type="text" id="titre" name="titre" required>
+                </div>
+                <div class="input-group">
+                    <label for="compositeur">Compositeur:</label>
+                    <div class="autocomplete">
+                        <input type="text" id="compositeur" name="compositeur" autocomplete="off">
+                        <ul class="autocomplete-list" id="compositeur-autocomplete-list"></ul>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="style">Style:</label>
+                    <div class="autocomplete">
+                        <input type="text" id="style" name="style" autocomplete="off">
+                        <ul class="autocomplete-list" id="style-autocomplete-list"></ul>
+                    </div>
+                </div>
+                <button type="submit" class="btn-ajouter" id="btn-ajouter-modifier">Ajouter morceau</button>
+                <button type="button" class="btn-annuler hidden" id="btn-annuler-modifier">Annuler</button>
+            </form>
+        </section>
+
+        <section id="liste-morceaux">
+            <h2>Liste des morceaux</h2>
+            <div id="tri-morceaux">
+                <label for="tri-selection">Trier par:</label>
+                <select id="tri-selection">
+                    <option value="aucun">Aucun tri</option>
+                    <option value="titre">Titre</option>
+                    <option value="compositeur">Compositeur</option>
+                    <option value="style">Style</option>
+                </select>
+            </div>
+            <ul id="morceaux-liste">
+            </ul>
+        </section>
+
+        <section id="notes-repetition" class="hidden">
+            <h2>Notes de répétition</h2>
+            <textarea id="notes" placeholder="Ajouter des notes sur la répétition..."></textarea>
+            <button id="btn-sauvegarder-notes" class="btn-sauvegarder">Sauvegarder les notes</button>
+        </section>
+    </main>
+
+    <footer>
+        <nav>
+            <button id="btn-liste" class="nav-btn active">Morceaux</button>
+            <button id="btn-notes" class="nav-btn">Notes</button>
+        </nav>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
