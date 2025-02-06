@@ -2,14 +2,17 @@
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM chargé, application initialisée.');
-    loadPieceList(); // Charger la liste des morceaux au démarrage
+    loadPieceList();
+
+    // Événements pour le bouton "Ajouter une pièce"
+    document.getElementById('add-piece-button').addEventListener('click', showPieceFormSection);
 
     // Événements pour le formulaire d'ajout/modification
     const pieceForm = document.getElementById('piece-form');
     pieceForm.addEventListener('submit', handlePieceFormSubmit);
 
     const cancelPieceFormButton = document.getElementById('cancel-piece-form');
-    cancelPieceFormButton.addEventListener('click', cancelPieceForm);
+    cancelPieceFormButton.addEventListener('click', hidePieceFormSection);
 
     // Événements pour la liste des morceaux (tri)
     document.getElementById('sort-by-title').addEventListener('click', () => sortPieceList('title'));
@@ -38,18 +41,16 @@ function registerServiceWorker() {
 }
 
 function handlePieceFormSubmit(event) {
-    event.preventDefault(); // Empêcher la soumission par défaut du formulaire
+    event.preventDefault();
 
     const pieceId = document.getElementById('piece-id').value;
     const title = document.getElementById('piece-title').value;
     const composer = document.getElementById('piece-composer').value;
     const style = document.getElementById('piece-style').value;
     const customStyleInput = document.getElementById('custom-style');
-    const customStyle = customStyleInput.value.trim(); // Récupérer la valeur et supprimer les espaces inutiles
-    const tempo = document.getElementById('piece-tempo').value;
-    const partitionFile = document.getElementById('piece-partition').files[0];
+    const customStyle = customStyleInput.value.trim();
+    const referenceLink = document.getElementById('piece-reference-link').value;
 
-    // Validation simple (titre obligatoire)
     if (!title) {
         alert('Le titre du morceau est obligatoire.');
         return;
@@ -57,36 +58,30 @@ function handlePieceFormSubmit(event) {
 
     let finalStyle = style;
     if (style === 'Autre' && customStyle) {
-        finalStyle = customStyle; // Utiliser le style personnalisé si "Autre" est sélectionné et un style personnalisé est fourni
+        finalStyle = customStyle;
     } else if (style === 'Autre' && !customStyle) {
         alert('Veuillez spécifier un style personnalisé si "Autre" est sélectionné.');
-        return; // Arrêter la soumission si "Autre" est sélectionné mais aucun style personnalisé n'est donné
+        return;
     }
 
 
     const pieceData = {
-        id: pieceId || generateUniqueId(), // Générer un ID unique si nouveau morceau
+        id: pieceId || generateUniqueId(),
         titre: title,
         compositeur: composer,
         style: finalStyle,
-        tempo: tempo ? parseInt(tempo) : null, // Convertir en nombre si tempo est fourni
-        partition: partitionFile ? partitionFile.name : null // Stocker le nom du fichier pour l'instant
-        // **Note:** Dans une application réelle, vous géreriez probablement l'upload et le stockage des fichiers partitions plus en détail.
+        referenceLink: referenceLink,
+        notes: []
     };
 
     if (pieceId) {
-        updatePiece(pieceId, pieceData); // Mettre à jour un morceau existant
+        updatePiece(pieceId, pieceData);
     } else {
-        addPiece(pieceData); // Ajouter un nouveau morceau
+        addPiece(pieceData);
     }
 
-    loadPieceList(); // Recharger la liste après l'ajout/modification
-    resetPieceForm(); // Réinitialiser le formulaire
-}
-
-
-function cancelPieceForm() {
-    resetPieceForm();
+    loadPieceList();
+    hidePieceFormSection();
 }
 
 
@@ -96,16 +91,14 @@ function resetPieceForm() {
     document.getElementById('piece-composer').value = '';
     document.getElementById('piece-style').value = '';
     document.getElementById('custom-style').value = '';
-    document.getElementById('piece-tempo').value = '';
-    document.getElementById('piece-partition').value = ''; // Réinitialiser l'input de fichier aussi
-    document.getElementById('custom-style').style.display = 'none'; // Cacher le champ style personnalisé
-    document.getElementById('cancel-piece-form').style.display = 'none'; // Cacher le bouton annuler
+    document.getElementById('piece-reference-link').value = '';
+    document.getElementById('custom-style').style.display = 'none';
+    document.getElementById('cancel-piece-form').style.display = 'none';
 }
-
 
 function loadPieceList() {
     const pieceList = getAllPieces();
-    displayPieceList(pieceList); // Afficher la liste dans l'UI (fonction définie dans ui.js)
+    displayPieceList(pieceList);
 }
 
 
@@ -116,23 +109,23 @@ function sortPieceList(sortBy) {
     if (sortBy === 'title') {
         sortedList = pieceList.sort((a, b) => a.titre.localeCompare(b.titre));
     } else if (sortBy === 'composer') {
-        sortedList = pieceList.sort((a, b) => (a.compositeur || '').localeCompare(b.compositeur || '')); // Gérer les compositeurs optionnels
+        sortedList = pieceList.sort((a, b) => (a.compositeur || '').localeCompare(b.compositeur || ''));
     } else if (sortBy === 'style') {
-        sortedList = pieceList.sort((a, b) => (a.style || '').localeCompare(b.style || '')); // Gérer les styles optionnels
+        sortedList = pieceList.sort((a, b) => (a.style || '').localeCompare(b.style || ''));
     } else {
         return; // Tri non reconnu
     }
 
-    displayPieceList(sortedList); // Afficher la liste triée
+    displayPieceList(sortedList);
 }
 
 
 function saveRepetitionNotes() {
-    const pieceId = document.getElementById('piece-id').value; // Réutiliser l'ID stocké temporairement dans le formulaire
+    const pieceId = document.getElementById('piece-id').value;
     const notesText = document.getElementById('repetition-notes').value;
 
     if (pieceId) {
-        addRepetitionNote(pieceId, notesText); // Fonction à implémenter dans pieces.js
+        addRepetitionNote(pieceId, notesText);
         hideRepetitionNotesSection();
         alert('Notes enregistrées !');
     } else {
@@ -145,7 +138,7 @@ function hideRepetitionNotesSection() {
 }
 
 
-// Fonctions utilitaires (vous pouvez les déplacer dans un fichier util.js si vous en avez plus)
+// Fonctions utilitaires
 function generateUniqueId() {
-    return Date.now().toString(36) + Math.random().toString(36).substring(2, 15); // Générer un ID semi-aléatoire
+    return Date.now().toString(36) + Math.random().toString(36).substring(2, 15);
 }
