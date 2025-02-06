@@ -1,0 +1,223 @@
+/* style.css */
+
+/* Couleurs principales (à personnaliser) */
+:root {
+    --primary-blue: #3498db;
+    --secondary-violet: #9b59b6;
+    --light-gray: #f0f0f0;
+    --white: #ffffff;
+    --dark-gray: #333333;
+    --accent-color: #e74c3c; /* Rouge/Orange pour les actions importantes */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+}
+
+header {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    text-align: center;
+    padding: 1em 0;
+    margin-bottom: 1em;
+}
+
+main {
+    padding: 1em;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+section {
+    background-color: var(--white);
+    padding: 1.5em;
+    margin-bottom: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+section h2 {
+    color: var(--secondary-violet);
+    margin-top: 0;
+}
+
+/* Formulaire */
+#piece-form label {
+    display: block;
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+#piece-form input[type="text"],
+#piece-form input[type="number"],
+#piece-form select,
+#piece-form input[type="file"],
+#repetition-notes {
+    width: 100%;
+    padding: 0.7em;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box; /* Important pour éviter que le padding n'augmente la largeur */
+}
+
+#repetition-notes {
+    min-height: 150px;
+    font-family: 'Arial', sans-serif; /* Hérite de la police du body pour la cohérence */
+}
+
+#piece-form button[type="submit"],
+#piece-form button[type="button"],
+#piece-list-controls button,
+#repetition-notes-actions button {
+    background-color: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    padding: 0.8em 1.2em;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+    margin-right: 0.5em; /* Espacement entre les boutons si nécessaire */
+}
+
+#piece-form button[type="submit"]:hover,
+#piece-form button[type="button"]:hover,
+#piece-list-controls button:hover,
+#repetition-notes-actions button:hover {
+    background-color: var(--secondary-violet);
+}
+
+#piece-form button[type="button"]#cancel-piece-form,
+#repetition-notes-actions button#cancel-notes {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    border: 1px solid #ccc;
+}
+
+#piece-form button[type="button"]#cancel-piece-form:hover,
+#repetition-notes-actions button#cancel-notes:hover {
+    background-color: #ddd;
+}
+
+
+/* Liste des morceaux */
+#piece-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+#piece-list li {
+    background-color: var(--light-gray);
+    padding: 1em;
+    margin-bottom: 0.5em;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#piece-list li:nth-child(even) {
+    background-color: #e0e0e0; /* Légère variation pour les lignes paires */
+}
+
+.piece-item-info {
+    flex-grow: 1;
+}
+
+.piece-actions button {
+    margin-left: 0.5em;
+    background-color: var(--accent-color); /* Couleur d'accent pour les actions importantes */
+}
+
+.piece-actions button:hover {
+    background-color: darken(var(--accent-color), 10%); /* Assombrir légèrement au survol */
+}
+
+
+/* Contrôles de la liste des morceaux */
+#piece-list-controls {
+    display: flex;
+    justify-content: flex-start; /* Aligner les boutons à gauche */
+    gap: 0.5em; /* Espacement entre les boutons */
+    margin-bottom: 1em;
+}
+
+#piece-list-controls button {
+    /* Réutilise les styles des boutons définis précédemment */
+    font-size: 0.9em; /* Légèrement plus petits pour les contrôles */
+    padding: 0.6em 1em;
+}
+
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1em 0;
+    margin-top: 2em;
+    background-color: var(--light-gray);
+    border-top: 1px solid #ccc;
+    color: #777;
+    font-size: 0.9em;
+}
+
+/* Responsive Design (basique pour mobile) */
+@media (max-width: 600px) {
+    main {
+        padding: 0.5em;
+    }
+
+    section {
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+
+    #piece-form input[type="text"],
+    #piece-form input[type="number"],
+    #piece-form select,
+    #piece-form input[type="file"],
+    #repetition-notes {
+        padding: 0.5em;
+        margin-bottom: 0.8em;
+        font-size: 0.95em; /* Légèrement plus petit sur mobile */
+    }
+
+    #piece-form button[type="submit"],
+    #piece-form button[type="button"],
+    #piece-list-controls button,
+    #repetition-notes-actions button {
+        padding: 0.6em 1em;
+        font-size: 0.9em;
+    }
+
+    #piece-list li {
+        flex-direction: column; /* Empiler les infos et les boutons sur mobile */
+        align-items: flex-start; /* Aligner à gauche sur mobile */
+    }
+
+    .piece-actions {
+        margin-top: 0.5em; /* Ajouter de l'espace au-dessus des boutons sur mobile */
+        text-align: right; /* Aligner les boutons à droite, si souhaité, ou retirer cette ligne pour un alignement à gauche */
+    }
+
+    .piece-actions button {
+        margin-left: 0; /* Retirer la marge gauche sur mobile */
+        margin-right: 0.5em; /* Ajouter une marge droite pour séparer les boutons empilés */
+    }
+
+    #piece-list-controls {
+        flex-direction: column; /* Empiler les boutons de tri sur mobile */
+        align-items: flex-start; /* Aligner à gauche sur mobile */
+    }
+
+    #piece-list-controls button {
+        margin-bottom: 0.5em; /* Espacement entre les boutons de tri empilés */
+        width: 100%; /* Boutons de tri prennent toute la largeur disponible sur mobile */
+        box-sizing: border-box; /* Pour que le padding n'augmente pas la largeur totale */
+        text-align: center; /* Centrer le texte dans les boutons de tri pleine largeur */
+    }
+}
