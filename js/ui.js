@@ -6,7 +6,13 @@ const pieceCategories = ["Concerto", "Sonate", "Pièces solo", "Etudes/Caprices"
 function displayPieceListByCategory(pieces) { // CHANGEMENT : Fonction pour afficher par catégorie
     pieceCategories.forEach(category => { // Iterer sur les catégories définies
         const categoryPieces = pieces.filter(piece => piece.category === category); // Filtrer les morceaux par catégorie
-        const categoryListElement = document.getElementById(getCategoryId(category)); // Obtenir l'élément UL pour cette catégorie
+        const categoryId = getCategoryId(category); // Obtenir l'élément UL pour cette catégorie
+
+        console.log("Catégorie:", category); // Affiche le nom de la catégorie
+        console.log("ID généré par getCategoryId:", categoryId); // Affiche l'ID généré
+        const categoryListElement = document.getElementById(categoryId); // Essaye de récupérer l'élément UL
+        console.log("Résultat de document.getElementById:", categoryListElement); // Affiche le résultat de getElementById
+
         categoryListElement.innerHTML = ''; // Vider la liste précédente de cette catégorie
 
         if (categoryPieces.length === 0) {
