@@ -1,12 +1,12 @@
-/* style.css - DESIGN AMÉLIORÉ (Boutons "Modifier, Supprimer, Notes") */
+/* style.css - DESIGN AMÉLIORÉ - Catégories & Boutons Tri Supprimés */
 
 /* Importation des polices Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500;600&display=swap');
 
 /* Couleurs principales - Palette dynamique et moderne */
 :root {
-    --primary-blue: #4a69bd; /* Bleu primaire plus profond */
-    --secondary-violet: #8e44ad; /* Violet secondaire plus vibrant */
+    --primary-blue: #6777ef; /* Bleu primaire plus clair et moderne */
+    --secondary-violet: #9354bd; /* Violet secondaire légèrement ajusté */
     --light-gray: #f9f9f9; /* Gris très clair, presque blanc */
     --white: #ffffff;
     --dark-gray: #333333;
@@ -15,88 +15,90 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif; /* Police pour le corps du texte */
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     background-color: var(--light-gray);
     color: var(--dark-gray);
-    -webkit-font-smoothing: antialiased; /* Lissage de la police pour une meilleure apparence */
+    -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 header {
-    background: linear-gradient(to right, var(--primary-blue), var(--secondary-violet)); /* Dégradé pour l'en-tête */
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-violet));
     color: var(--white);
     text-align: center;
-    padding: 1.5em 0; /* Plus de padding pour un en-tête plus visible */
+    padding: 1.5em 0;
     margin-bottom: 1.5em;
-    border-radius: 0 0 12px 12px; /* Coins arrondis en bas de l'en-tête */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée pour l'en-tête */
-    font-family: 'Montserrat', sans-serif; /* Police pour le titre de l'en-tête */
+    border-radius: 0 0 12px 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    font-family: 'Montserrat', sans-serif;
 }
 
 header h1 {
-    font-size: 2.5em; /* Titre plus grand */
+    font-size: 2.5em;
     margin: 0;
-    letter-spacing: -0.05em; /* Léger espacement des lettres pour le titre */
+    letter-spacing: -0.05em;
 }
 
 main {
     padding: 1.5em;
-    max-width: 900px; /* Main plus large */
+    max-width: 900px;
     margin: 0 auto;
 }
 
 section {
     background-color: var(--white);
-    padding: 2em; /* Plus de padding pour les sections */
-    margin-bottom: 2em; /* Plus de marge entre les sections */
-    border-radius: 12px; /* Coins arrondis plus prononcés pour les sections */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre plus douce pour les sections */
-    border: 1px solid #eee; /* Bordure très légère pour définir les sections */
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Transition douce */
+    padding: 2em;
+    margin-bottom: 2em;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #eee;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 section:hover {
-    transform: translateY(-3px); /* Léger décalage vers le haut au survol */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Ombre plus importante au survol */
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 
 section h2 {
     color: var(--secondary-violet);
     margin-top: 0;
-    font-family: 'Montserrat', sans-serif; /* Police pour les titres de section */
-    font-size: 1.8em; /* Titres de section plus grands */
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.8em;
     margin-bottom: 0.8em;
-    border-bottom: 2px solid var(--secondary-violet); /* Soulignement des titres de section */
+    border-bottom: 2px solid var(--secondary-violet);
     padding-bottom: 0.5em;
-    display: inline-block; /* Ajustement pour le soulignement */
+    display: inline-block;
 }
 
-/* Section Bouton "Ajouter une pièce" */
+/* Section Bouton "Ajouter une pièce" - Couleur Bleu/Violet */
 #add-piece-button-section {
-    text-align: center; /* Centrer le bouton */
-    margin-bottom: 2em; /* Marge en dessous du bouton */
+    text-align: center;
+    margin-bottom: 2em;
 }
 
 #add-piece-button {
-    background-color: var(--success-color); /* Couleur verte pour le bouton "Ajouter une pièce" */
+    /* background-color: var(--success-color); Couleur verte remplacée par bleu/violet */
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-violet)); /* Dégradé bleu/violet */
     color: var(--white);
     border: none;
-    padding: 1.2em 2.5em; /* Plus grand et plus visible */
+    padding: 1.2em 2.5em;
     border-radius: 30px;
     cursor: pointer;
     font-size: 1.2em;
     font-weight: 600;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15); /* Ombre un peu plus marquée */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
 }
 
 #add-piece-button:hover {
-    background-color: #27ae60; /* Vert légèrement plus foncé au survol */
+    /* background-color: #27ae60; Vert remplacé par violet plus foncé */
+    background-color: var(--secondary-violet); /* Violet plus foncé au survol */
     transform: translateY(-2px);
-    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2); /* Ombre plus importante au survol */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
 }
 
 
@@ -104,97 +106,119 @@ section h2 {
 #piece-form label {
     display: block;
     margin-bottom: 0.7em;
-    font-weight: 500; /* Légèrement plus gras */
-    color: var(--dark-gray); /* Couleur du label */
+    font-weight: 500;
+    color: var(--dark-gray);
 }
 
 #piece-form input[type="text"],
 #piece-form input[type="number"],
 #piece-form select,
 #piece-form input[type="file"],
-#piece-form input[type="url"], /* Style pour le nouveau champ URL */
+#piece-form input[type="url"],
 #repetition-notes {
     width: 100%;
-    padding: 1em; /* Padding plus généreux pour les inputs */
-    margin-bottom: 1.5em; /* Plus de marge sous les inputs */
-    border: 1px solid #ddd; /* Bordure plus légère */
-    border-radius: 8px; /* Coins arrondis pour les inputs */
+    padding: 1em;
+    margin-bottom: 1.5em;
+    border: 1px solid #ddd;
+    border-radius: 8px;
     box-sizing: border-box;
     font-size: 1em;
     color: var(--dark-gray);
-    background-color: var(--light-gray); /* Fond légèrement grisé pour les inputs */
-    transition: border-color 0.3s ease; /* Transition pour la bordure */
+    background-color: var(--light-gray);
+    transition: border-color 0.3s ease;
 }
 
 #piece-form input[type="text"]:focus,
 #piece-form input[type="number"]:focus,
 #piece-form select:focus,
 #piece-form input[type="file"]:focus,
-#piece-form input[type="url"]:focus, /* Focus pour le nouveau champ URL */
+#piece-form input[type="url"]:focus,
 #repetition-notes:focus {
-    border-color: var(--primary-blue); /* Bordure bleue au focus */
-    outline: none; /* Supprimer l'outline par défaut au focus */
-    box-shadow: 0 0 5px rgba(var(--primary-blue-rgb), 0.3); /* Ombre légère au focus */
+    border-color: var(--primary-blue);
+    outline: none;
+    box-shadow: 0 0 5px rgba(var(--primary-blue-rgb), 0.3);
 }
 
 
 #repetition-notes {
-    min-height: 180px; /* Hauteur minimale plus importante pour le textarea */
+    min-height: 180px;
     font-family: 'Poppins', sans-serif;
-    line-height: 1.6; /* Meilleure interlinéaire pour le textarea */
+    line-height: 1.6;
 }
 
 /* Boutons - Style moderne et arrondi */
 #piece-form button[type="submit"],
 #piece-form button[type="button"],
-#piece-list-controls button,
+/* #piece-list-controls button,  SUPPRESSION DU STYLE POUR LES BOUTONS DE TRI */
 #piece-actions button,
 #repetition-notes-actions button {
     background-color: var(--primary-blue);
     color: var(--white);
     border: none;
-    padding: 1em 2em; /* Padding plus important pour les boutons */
-    border-radius: 30px; /* Boutons complètement arrondis */
+    padding: 1em 2em;
+    border-radius: 30px;
     cursor: pointer;
-    font-size: 1.1em; /* Police légèrement plus grande pour les boutons */
-    font-weight: 600; /* Police plus grasse pour les boutons */
-    letter-spacing: 0.03em; /* Léger espacement des lettres pour les boutons */
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transitions pour couleur et transformation */
+    font-size: 1.1em;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
     margin-right: 0.6em;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère pour les boutons */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 #piece-form button[type="submit"]:hover,
 #piece-form button[type="button"]:hover,
-#piece-list-controls button:hover,
+/* #piece-list-controls button:hover,  SUPPRESSION DU STYLE POUR LES BOUTONS DE TRI */
 #piece-actions button:hover,
 #repetition-notes-actions button:hover {
     background-color: var(--secondary-violet);
-    transform: translateY(-2px); /* Léger déplacement vers le haut au survol */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombre plus importante au survol */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 #piece-form button[type="button"]#cancel-piece-form,
 #repetition-notes-actions button#cancel-notes {
-    background-color: var(--white); /* Fond blanc pour les boutons "Annuler" */
+    background-color: var(--white);
     color: var(--dark-gray);
     border: 1px solid #ccc;
 }
 
 #piece-form button[type="button"]#cancel-piece-form:hover,
 #repetition-notes-actions button#cancel-notes:hover {
-    background-color: #f0f0f0; /* Gris très clair au survol des boutons "Annuler" */
-    transform: translateY(-1px); /* Léger déplacement au survol */
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Ombre au survol */
+    background-color: #f0f0f0;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Liste des morceaux - Style raffiné */
-#piece-list ul {
+/* Sections de catégories du Répertoire */
+#piece-category-section h2 {
+    text-align: center; /* Titre "Répertoire" centré */
+    margin-bottom: 1.5em; /* Plus de marge en dessous */
+}
+
+.category-section {
+    margin-bottom: 2.5em; /* Plus de marge entre les sections de catégories */
+}
+
+.category-section h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--primary-blue); /* Titres de catégorie en bleu primaire */
+    font-size: 1.6em; /* Titres de catégorie plus grands */
+    margin-top: 0;
+    margin-bottom: 1em; /* Marge sous les titres de catégorie */
+    padding-bottom: 0.3em;
+    border-bottom: 2px solid var(--primary-blue); /* Soulignement des titres de catégorie */
+    display: inline-block; /* Ajustement pour le soulignement */
+}
+
+
+/* Liste de morceaux par catégorie */
+.piece-list {
     list-style: none;
     padding: 0;
 }
 
-#piece-list li {
+.piece-list li {
     background-color: var(--white);
     padding: 1.5em;
     margin-bottom: 0.8em;
@@ -203,69 +227,56 @@ section h2 {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    border-left: 5px solid var(--primary-blue);
+    border-left: 5px solid var(--secondary-violet); /* Bande violette pour les éléments de liste dans les catégories */
     transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out;
 }
 
-#piece-list li:hover {
+.piece-list li:hover {
     box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
     transform: translateX(2px);
 }
 
 
 .piece-item-info h3 {
-    margin: 0 0 0.5em 0;
-    font-size: 1.4em;
-    color: var(--primary-blue);
-    font-family: 'Montserrat', sans-serif;
+    margin: 0 0 0.3em 0; /* Réduction marge sous titre morceau */
+    font-size: 1.2em; /* Titres de morceaux légèrement plus petits */
+    color: var(--dark-gray); /* Titre morceau en gris foncé */
+    font-family: 'Poppins', sans-serif; /* Police Poppins pour titre morceau */
+    font-weight: 600; /* Titre morceau en gras */
 }
 
 .piece-item-info p {
-    margin: 0.3em 0;
-    color: #555;
+    margin: 0; /* Suppression marge des paragraphes d'info */
+    color: #777; /* Couleur de texte secondaire encore plus douce */
     font-size: 1em;
 }
 
 .piece-actions button {
     margin-left: 0.8em;
-    /* background-color: var(--accent-color);  SUPPRESSION DE LA COULEUR D'ACCENT SPÉCIFIQUE */
-    /* font-size: 0.95em;  SUPPRESSION DE LA TAILLE DE POLICE SPÉCIFIQUE */
-    /* padding: 0.8em 1.5em;  SUPPRESSION DU PADDING SPÉCIFIQUE */
-    /* Réutilisation des styles de boutons globaux */
-    background-color: var(--primary-blue); /* Réutiliser la couleur primaire */
+    background-color: var(--primary-blue);
     color: var(--white);
     border: none;
-    padding: 1em 2em; /* Réutiliser padding global boutons */
-    border-radius: 30px; /* Réutiliser border-radius global boutons */
+    padding: 0.8em 1.6em; /* Ajustement padding boutons actions liste */
+    border-radius: 25px; /* Boutons actions légèrement moins arrondis */
     cursor: pointer;
-    font-size: 1.1em; /* Réutiliser font-size global boutons */
-    font-weight: 600;
-    letter-spacing: 0.03em;
+    font-size: 0.95em; /* Taille police boutons actions légèrement réduite */
+    font-weight: 500; /* Police moins grasse boutons actions */
+    letter-spacing: 0.02em; /* Ajustement espacement lettres boutons actions */
     transition: background-color 0.3s ease, transform 0.2s ease;
     margin-right: 0.6em;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); /* Ombre plus légère boutons actions */
 }
 
 .piece-actions button:hover {
-    background-color: var(--secondary-violet); /* Réutiliser couleur hover globale */
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    background-color: var(--secondary-violet);
+    transform: translateY(-1px); /* Déplacement hover réduit */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Ombre hover réduite */
 }
 
 
-/* Contrôles de la liste des morceaux - Style amélioré */
+/* Contrôles de la liste des morceaux - SUPPRESSION DES BOUTONS DE TRI */
 #piece-list-controls {
-    display: flex;
-    justify-content: flex-start;
-    gap: 0.8em; /* Espacement entre les boutons de contrôle de liste */
-    margin-bottom: 1.5em;
-}
-
-#piece-list-controls button {
-    font-size: 1em; /* Taille de police pour les boutons de contrôle de liste */
-    padding: 0.9em 1.8em; /* Padding ajusté pour les boutons de contrôle de liste */
-    border-radius: 30px; /* Boutons de contrôle de liste arrondis */
-    font-weight: 500;
+    display: none; /* Cacher complètement les contrôles de tri */
 }
 
 
@@ -276,7 +287,7 @@ footer {
     margin-top: 3em;
     background-color: var(--light-gray);
     border-top: 1px solid #ddd;
-    color: #999; /* Couleur plus claire pour le footer */
+    color: #999;
     font-size: 0.9em;
 }
 
@@ -292,9 +303,13 @@ footer {
     }
 
     section h2 {
-        font-size: 1.6em; /* Titres de section légèrement plus petits sur mobile */
+        font-size: 1.6em;
         margin-bottom: 0.6em;
         padding-bottom: 0.4em;
+    }
+
+    #piece-form label {
+        margin-bottom: 0.6em; /* Réduire marge labels mobile */
     }
 
     #piece-form input[type="text"],
@@ -303,18 +318,19 @@ footer {
     #piece-form input[type="file"],
     #piece-form input[type="url"],
     #repetition-notes {
-        padding: 0.9em;
-        margin-bottom: 1.2em;
-        font-size: 1em; /* Taille de police des inputs sur mobile */
+        padding: 0.8em; /* Réduire padding inputs mobile */
+        margin-bottom: 1em; /* Réduire marge inputs mobile */
+        font-size: 0.95em;
     }
 
     #piece-form button[type="submit"],
     #piece-form button[type="button"],
-    #piece-list-controls button,
+    /* #piece-list-controls button, SUPPRESSION STYLE BOUTONS TRI */
     #piece-actions button,
-    #repetition-notes-actions button {
-        padding: 0.9em 1.8em;
-        font-size: 1em; /* Taille de police des boutons sur mobile */
+    #repetition-notes-actions button,
+    #add-piece-button /* Inclure bouton "Ajouter une pièce" dans responsive */ {
+        padding: 0.8em 1.6em; /* Réduire padding boutons mobile */
+        font-size: 0.9em;
     }
 
     #piece-list li {
@@ -325,30 +341,46 @@ footer {
     }
 
     .piece-item-info h3 {
-        font-size: 1.3em; /* Titres de morceaux légèrement plus petits sur mobile */
-        margin-bottom: 0.3em;
+        font-size: 1.2em; /* Titres de morceaux légèrement plus petits sur mobile */
+        margin-bottom: 0.2em; /* Réduire marge titre morceau mobile */
     }
 
     .piece-actions {
-        margin-top: 0.8em; /* Marge pour les actions sur mobile */
-        text-align: right; /* Aligner à droite sur mobile ou supprimer pour aligner à gauche */
+        margin-top: 0.6em; /* Réduire marge actions mobile */
+        text-align: right;
     }
 
     .piece-actions button {
         margin-left: 0;
-        margin-right: 0.5em;
+        margin-right: 0.4em; /* Réduire marge droite boutons actions mobile */
     }
 
-    #piece-list-controls {
-        flex-direction: column;
-        align-items: stretch; /* Boutons de contrôle de liste prennent toute la largeur sur mobile */
-        gap: 0.6em;
-        margin-bottom: 1.2em;
+    /* #piece-list-controls { SUPPRESSION STYLE BOUTONS TRI */
+    /*    flex-direction: column;*/
+    /*    align-items: stretch;*/
+    /*    gap: 0.6em;*/
+    /*    margin-bottom: 1.2em;*/
+    /*}*/
+
+    /* #piece-list-controls button { SUPPRESSION STYLE BOUTONS TRI */
+    /*    width: 100%;*/
+    /*    box-sizing: border-box;*/
+    /*    text-align: center;*/
+    /*}*/
+
+    .category-section h3 {
+        font-size: 1.4em; /* Titres de catégorie légèrement plus petits sur mobile */
+        margin-bottom: 0.8em; /* Réduire marge titres catégories mobile */
     }
 
-    #piece-list-controls button {
-        width: 100%; /* Boutons de contrôle pleine largeur sur mobile */
-        box-sizing: border-box;
-        text-align: center;
+    .category-section {
+        margin-bottom: 2em; /* Réduire marge sections catégories mobile */
     }
+
+    .piece-list li {
+        padding: 1em; /* Réduire padding liste morceaux mobile */
+        margin-bottom: 0.7em; /* Réduire marge liste morceaux mobile */
+    }
+
+
 }
