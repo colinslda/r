@@ -39,9 +39,8 @@ function displayPieceListByCategory(pieces) { // CHANGEMENT : Fonction pour affi
 
 
 function getCategoryId(categoryName) { // Fonction utilitaire pour obtenir l'ID de l'UL de catégorie
-    return `piece-${categoryName.toLowerCase().replace(/[^a-z]+/g, '')}-list`; // CORRECTION : Supprimer le tiret supplémentaire après 'piece-list'
+    return `${categoryName.toLowerCase().replace(/[^a-z]+/g, '')}-list`; // CORRECTION : Supprimer "piece-" du début de l'ID
 }
-
 
 function attachListEventListeners() {
     const pieceCategorySection = document.getElementById('piece-category-section'); // CHANGEMENT : Listener sur la section catégorie entière
