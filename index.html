@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Répétition Musicale PWA</title>
+    <title>**DACAPO**</title> <--- CHANGEMENT ICI
     <link rel="stylesheet" href="css/style.css">
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
@@ -11,12 +11,16 @@
 </head>
 <body>
     <header>
-        <h1>Répétition Musicale</h1>
+        <h1>**DACAPO**</h1> <--- CHANGEMENT ICI
     </header>
 
     <main>
-        <section id="piece-form-section">
-            <h2>Ajouter / Modifier un morceau</h2>
+        <section id="add-piece-button-section"> <--- AJOUT DE SECTION POUR BOUTON
+            <button id="add-piece-button">Ajouter une pièce</button> <--- BOUTON AJOUTER UNE PIÈCE
+        </section>
+
+        <section id="piece-form-section" style="display:none;"> <--- MASQUAGE INITIAL DU FORMULAIRE
+            <h2>Ajouter un morceau</h2>
             <form id="piece-form">
                 <input type="hidden" id="piece-id">
                 <div>
@@ -37,15 +41,11 @@
                         <option value="Pop">Pop</option>
                         <option value="Autre">Autre</option>
                     </select>
-                    <input type="text" id="custom-style" placeholder="Style personnalisé (si Autre)">
+                    <input type="text" id="custom-style" placeholder="Style personnalisé (si Autre)" style="display: none;"> <--- STYLE PERSONNALISÉ CACHÉ PAR DÉFAUT
                 </div>
                 <div>
-                    <label for="piece-tempo">Tempo (BPM):</label>
-                    <input type="number" id="piece-tempo" min="20" max="300">
-                </div>
-                <div>
-                    <label for="piece-partition">Partition:</label>
-                    <input type="file" id="piece-partition" accept="application/pdf, image/*">
+                    <label for="piece-reference-link">Lien d'écoute (YouTube, Apple Music):</label> <--- CHANGEMENT DE LABEL
+                    <input type="url" id="piece-reference-link" placeholder="URL YouTube ou Apple Music"> <--- CHANGEMENT TYPE INPUT et PLACEHOLDER
                 </div>
                 <button type="submit">Enregistrer le morceau</button>
                 <button type="button" id="cancel-piece-form" style="display:none;">Annuler</button>
@@ -60,7 +60,7 @@
                 <button id="sort-by-style">Trier par Style</button>
             </div>
             <ul id="piece-list">
-                </ul>
+            </ul>
         </section>
 
         <section id="repetition-notes-section" style="display:none;">
@@ -74,7 +74,7 @@
     </main>
 
     <footer>
-        <p>&copy; 2024 Mon App de Répétition Musicale</p>
+        <p>&copy; 2024 DACAPO</p> <--- CHANGEMENT ICI
     </footer>
 
     <script src="js/pieces.js"></script>
