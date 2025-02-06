@@ -33,7 +33,7 @@ function displayPieceListByCategory(pieces) { // CHANGEMENT : Fonction pour affi
 
 
 function getCategoryId(categoryName) { // Fonction utilitaire pour obtenir l'ID de l'UL de catégorie
-    return `piece-list-${categoryName.toLowerCase().replace(/[^a-z]+/g, '-')}`; // Générer un ID basé sur le nom de catégorie
+    return `piece-${categoryName.toLowerCase().replace(/[^a-z]+/g, '')}-list`; // CORRECTION : Supprimer le tiret supplémentaire après 'piece-list'
 }
 
 
