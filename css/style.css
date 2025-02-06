@@ -1,55 +1,85 @@
-/* style.css */
+/* style.css - DESIGN AMÉLIORÉ */
 
-/* Couleurs principales (à personnaliser) */
+/* Importation des polices Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500;600&display=swap');
+
+/* Couleurs principales - Palette dynamique et moderne */
 :root {
-    --primary-blue: #3498db;
-    --secondary-violet: #9b59b6;
-    --light-gray: #f0f0f0;
+    --primary-blue: #4a69bd; /* Bleu primaire plus profond */
+    --secondary-violet: #8e44ad; /* Violet secondaire plus vibrant */
+    --light-gray: #f9f9f9; /* Gris très clair, presque blanc */
     --white: #ffffff;
     --dark-gray: #333333;
-    --accent-color: #e74c3c; /* Rouge/Orange pour les actions importantes */
+    --accent-color: #ff6f61; /* Corail vif pour l'accentuation */
+    --success-color: #2ecc71; /* Vert succès */
 }
 
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Police pour le corps du texte */
     margin: 0;
     padding: 0;
     background-color: var(--light-gray);
     color: var(--dark-gray);
+    -webkit-font-smoothing: antialiased; /* Lissage de la police pour une meilleure apparence */
+    -moz-osx-font-smoothing: grayscale;
 }
 
 header {
-    background-color: var(--primary-blue);
+    background: linear-gradient(to right, var(--primary-blue), var(--secondary-violet)); /* Dégradé pour l'en-tête */
     color: var(--white);
     text-align: center;
-    padding: 1em 0;
-    margin-bottom: 1em;
+    padding: 1.5em 0; /* Plus de padding pour un en-tête plus visible */
+    margin-bottom: 1.5em;
+    border-radius: 0 0 12px 12px; /* Coins arrondis en bas de l'en-tête */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombre plus prononcée pour l'en-tête */
+    font-family: 'Montserrat', sans-serif; /* Police pour le titre de l'en-tête */
+}
+
+header h1 {
+    font-size: 2.5em; /* Titre plus grand */
+    margin: 0;
+    letter-spacing: -0.05em; /* Léger espacement des lettres pour le titre */
 }
 
 main {
-    padding: 1em;
-    max-width: 800px;
+    padding: 1.5em;
+    max-width: 900px; /* Main plus large */
     margin: 0 auto;
 }
 
 section {
     background-color: var(--white);
-    padding: 1.5em;
-    margin-bottom: 1.5em;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    padding: 2em; /* Plus de padding pour les sections */
+    margin-bottom: 2em; /* Plus de marge entre les sections */
+    border-radius: 12px; /* Coins arrondis plus prononcés pour les sections */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ombre plus douce pour les sections */
+    border: 1px solid #eee; /* Bordure très légère pour définir les sections */
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Transition douce */
 }
+
+section:hover {
+    transform: translateY(-3px); /* Léger décalage vers le haut au survol */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Ombre plus importante au survol */
+}
+
 
 section h2 {
     color: var(--secondary-violet);
     margin-top: 0;
+    font-family: 'Montserrat', sans-serif; /* Police pour les titres de section */
+    font-size: 1.8em; /* Titres de section plus grands */
+    margin-bottom: 0.8em;
+    border-bottom: 2px solid var(--secondary-violet); /* Soulignement des titres de section */
+    padding-bottom: 0.5em;
+    display: inline-block; /* Ajustement pour le soulignement */
 }
 
-/* Formulaire */
+/* Formulaire - Style amélioré */
 #piece-form label {
     display: block;
-    margin-bottom: 0.5em;
-    font-weight: bold;
+    margin-bottom: 0.7em;
+    font-weight: 500; /* Légèrement plus gras */
+    color: var(--dark-gray); /* Couleur du label */
 }
 
 #piece-form input[type="text"],
@@ -58,122 +88,170 @@ section h2 {
 #piece-form input[type="file"],
 #repetition-notes {
     width: 100%;
-    padding: 0.7em;
-    margin-bottom: 1em;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box; /* Important pour éviter que le padding n'augmente la largeur */
+    padding: 1em; /* Padding plus généreux pour les inputs */
+    margin-bottom: 1.5em; /* Plus de marge sous les inputs */
+    border: 1px solid #ddd; /* Bordure plus légère */
+    border-radius: 8px; /* Coins arrondis pour les inputs */
+    box-sizing: border-box;
+    font-size: 1em;
+    color: var(--dark-gray);
+    background-color: var(--light-gray); /* Fond légèrement grisé pour les inputs */
+    transition: border-color 0.3s ease; /* Transition pour la bordure */
 }
+
+#piece-form input[type="text"]:focus,
+#piece-form input[type="number"]:focus,
+#piece-form select:focus,
+#piece-form input[type="file"]:focus,
+#repetition-notes:focus {
+    border-color: var(--primary-blue); /* Bordure bleue au focus */
+    outline: none; /* Supprimer l'outline par défaut au focus */
+    box-shadow: 0 0 5px rgba(var(--primary-blue-rgb), 0.3); /* Ombre légère au focus */
+}
+
 
 #repetition-notes {
-    min-height: 150px;
-    font-family: 'Arial', sans-serif; /* Hérite de la police du body pour la cohérence */
+    min-height: 180px; /* Hauteur minimale plus importante pour le textarea */
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6; /* Meilleure interlinéaire pour le textarea */
 }
 
+/* Boutons - Style moderne et arrondi */
 #piece-form button[type="submit"],
 #piece-form button[type="button"],
 #piece-list-controls button,
+#piece-actions button,
 #repetition-notes-actions button {
     background-color: var(--primary-blue);
     color: var(--white);
     border: none;
-    padding: 0.8em 1.2em;
-    border-radius: 6px;
+    padding: 1em 2em; /* Padding plus important pour les boutons */
+    border-radius: 30px; /* Boutons complètement arrondis */
     cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
-    margin-right: 0.5em; /* Espacement entre les boutons si nécessaire */
+    font-size: 1.1em; /* Police légèrement plus grande pour les boutons */
+    font-weight: 600; /* Police plus grasse pour les boutons */
+    letter-spacing: 0.03em; /* Léger espacement des lettres pour les boutons */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transitions pour couleur et transformation */
+    margin-right: 0.6em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Ombre légère pour les boutons */
 }
 
 #piece-form button[type="submit"]:hover,
 #piece-form button[type="button"]:hover,
 #piece-list-controls button:hover,
+#piece-actions button:hover,
 #repetition-notes-actions button:hover {
     background-color: var(--secondary-violet);
+    transform: translateY(-2px); /* Léger déplacement vers le haut au survol */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Ombre plus importante au survol */
 }
 
 #piece-form button[type="button"]#cancel-piece-form,
 #repetition-notes-actions button#cancel-notes {
-    background-color: var(--light-gray);
+    background-color: var(--white); /* Fond blanc pour les boutons "Annuler" */
     color: var(--dark-gray);
     border: 1px solid #ccc;
 }
 
 #piece-form button[type="button"]#cancel-piece-form:hover,
 #repetition-notes-actions button#cancel-notes:hover {
-    background-color: #ddd;
+    background-color: #f0f0f0; /* Gris très clair au survol des boutons "Annuler" */
+    transform: translateY(-1px); /* Léger déplacement au survol */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Ombre au survol */
 }
 
-
-/* Liste des morceaux */
+/* Liste des morceaux - Style raffiné */
 #piece-list ul {
     list-style: none;
     padding: 0;
 }
 
 #piece-list li {
-    background-color: var(--light-gray);
-    padding: 1em;
-    margin-bottom: 0.5em;
-    border-radius: 6px;
+    background-color: var(--white);
+    padding: 1.5em; /* Padding plus important pour les éléments de liste */
+    margin-bottom: 0.8em; /* Marge légèrement réduite entre les éléments */
+    border-radius: 10px; /* Coins légèrement moins arrondis pour les éléments de liste */
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Ombre légère pour les éléments de liste */
+    border-left: 5px solid var(--primary-blue); /* Bande de couleur à gauche */
+    transition: box-shadow 0.2s ease-in-out, transform 0.2s ease-in-out; /* Transition douce */
 }
 
-#piece-list li:nth-child(even) {
-    background-color: #e0e0e0; /* Légère variation pour les lignes paires */
+#piece-list li:hover {
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12); /* Ombre plus importante au survol des éléments de liste */
+    transform: translateX(2px); /* Léger décalage vers la droite au survol */
 }
 
-.piece-item-info {
-    flex-grow: 1;
+
+.piece-item-info h3 {
+    margin: 0 0 0.5em 0; /* Marge sous le titre */
+    font-size: 1.4em; /* Titres des morceaux plus grands */
+    color: var(--primary-blue); /* Titre en bleu primaire */
+    font-family: 'Montserrat', sans-serif; /* Police pour les titres de morceaux */
+}
+
+.piece-item-info p {
+    margin: 0.3em 0;
+    color: #555; /* Couleur de texte secondaire plus douce */
+    font-size: 1em;
 }
 
 .piece-actions button {
-    margin-left: 0.5em;
+    margin-left: 0.8em; /* Marge plus importante entre les boutons d'action */
     background-color: var(--accent-color); /* Couleur d'accent pour les actions importantes */
+    font-size: 0.95em; /* Légèrement plus petits pour les boutons d'action de liste */
+    padding: 0.8em 1.5em; /* Padding ajusté pour les boutons d'action de liste */
 }
 
 .piece-actions button:hover {
-    background-color: darken(var(--accent-color), 10%); /* Assombrir légèrement au survol */
+    background-color: #e05a4c; /* Assombrir légèrement la couleur d'accent au survol */
 }
 
 
-/* Contrôles de la liste des morceaux */
+/* Contrôles de la liste des morceaux - Style amélioré */
 #piece-list-controls {
     display: flex;
-    justify-content: flex-start; /* Aligner les boutons à gauche */
-    gap: 0.5em; /* Espacement entre les boutons */
-    margin-bottom: 1em;
+    justify-content: flex-start;
+    gap: 0.8em; /* Espacement entre les boutons de contrôle de liste */
+    margin-bottom: 1.5em;
 }
 
 #piece-list-controls button {
-    /* Réutilise les styles des boutons définis précédemment */
-    font-size: 0.9em; /* Légèrement plus petits pour les contrôles */
-    padding: 0.6em 1em;
+    font-size: 1em; /* Taille de police pour les boutons de contrôle de liste */
+    padding: 0.9em 1.8em; /* Padding ajusté pour les boutons de contrôle de liste */
+    border-radius: 30px; /* Boutons de contrôle de liste arrondis */
+    font-weight: 500;
 }
 
 
-/* Footer */
+/* Footer - Style simple et discret */
 footer {
     text-align: center;
-    padding: 1em 0;
-    margin-top: 2em;
+    padding: 1.5em 0;
+    margin-top: 3em;
     background-color: var(--light-gray);
-    border-top: 1px solid #ccc;
-    color: #777;
+    border-top: 1px solid #ddd;
+    color: #999; /* Couleur plus claire pour le footer */
     font-size: 0.9em;
 }
 
-/* Responsive Design (basique pour mobile) */
-@media (max-width: 600px) {
+/* Responsive Design - Ajustements pour mobile */
+@media (max-width: 768px) {
     main {
-        padding: 0.5em;
+        padding: 1em;
     }
 
     section {
-        padding: 1em;
-        margin-bottom: 1em;
+        padding: 1.5em;
+        margin-bottom: 1.5em;
+    }
+
+    section h2 {
+        font-size: 1.6em; /* Titres de section légèrement plus petits sur mobile */
+        margin-bottom: 0.6em;
+        padding-bottom: 0.4em;
     }
 
     #piece-form input[type="text"],
@@ -181,43 +259,52 @@ footer {
     #piece-form select,
     #piece-form input[type="file"],
     #repetition-notes {
-        padding: 0.5em;
-        margin-bottom: 0.8em;
-        font-size: 0.95em; /* Légèrement plus petit sur mobile */
+        padding: 0.9em;
+        margin-bottom: 1.2em;
+        font-size: 1em; /* Taille de police des inputs sur mobile */
     }
 
     #piece-form button[type="submit"],
     #piece-form button[type="button"],
     #piece-list-controls button,
+    #piece-actions button,
     #repetition-notes-actions button {
-        padding: 0.6em 1em;
-        font-size: 0.9em;
+        padding: 0.9em 1.8em;
+        font-size: 1em; /* Taille de police des boutons sur mobile */
     }
 
     #piece-list li {
-        flex-direction: column; /* Empiler les infos et les boutons sur mobile */
-        align-items: flex-start; /* Aligner à gauche sur mobile */
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1.2em;
+        margin-bottom: 1em;
+    }
+
+    .piece-item-info h3 {
+        font-size: 1.3em; /* Titres de morceaux légèrement plus petits sur mobile */
+        margin-bottom: 0.3em;
     }
 
     .piece-actions {
-        margin-top: 0.5em; /* Ajouter de l'espace au-dessus des boutons sur mobile */
-        text-align: right; /* Aligner les boutons à droite, si souhaité, ou retirer cette ligne pour un alignement à gauche */
+        margin-top: 0.8em; /* Marge pour les actions sur mobile */
+        text-align: right; /* Aligner à droite sur mobile ou supprimer pour aligner à gauche */
     }
 
     .piece-actions button {
-        margin-left: 0; /* Retirer la marge gauche sur mobile */
-        margin-right: 0.5em; /* Ajouter une marge droite pour séparer les boutons empilés */
+        margin-left: 0;
+        margin-right: 0.5em;
     }
 
     #piece-list-controls {
-        flex-direction: column; /* Empiler les boutons de tri sur mobile */
-        align-items: flex-start; /* Aligner à gauche sur mobile */
+        flex-direction: column;
+        align-items: stretch; /* Boutons de contrôle de liste prennent toute la largeur sur mobile */
+        gap: 0.6em;
+        margin-bottom: 1.2em;
     }
 
     #piece-list-controls button {
-        margin-bottom: 0.5em; /* Espacement entre les boutons de tri empilés */
-        width: 100%; /* Boutons de tri prennent toute la largeur disponible sur mobile */
-        box-sizing: border-box; /* Pour que le padding n'augmente pas la largeur totale */
-        text-align: center; /* Centrer le texte dans les boutons de tri pleine largeur */
+        width: 100%; /* Boutons de contrôle pleine largeur sur mobile */
+        box-sizing: border-box;
+        text-align: center;
     }
 }
