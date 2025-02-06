@@ -2,7 +2,7 @@
 
 function displayPieceList(pieces) {
     const pieceListElement = document.getElementById('piece-list');
-    pieceListElement.innerHTML = ''; // Vider la liste actuelle
+    pieceListElement.innerHTML = '';
 
     if (pieces.length === 0) {
         pieceListElement.innerHTML = '<p>Aucun morceau ajouté pour le moment.</p>';
@@ -49,17 +49,31 @@ function attachListEventListeners() {
 }
 
 
+function showPieceFormSection() {
+    document.getElementById('piece-form-section').style.display = 'block';
+    document.getElementById('add-piece-button-section').style.display = 'none';
+    document.getElementById('piece-form-section').scrollIntoView({behavior: 'smooth'});
+    document.getElementById('cancel-piece-form').style.display = 'inline-block';
+}
+
+function hidePieceFormSection() {
+    document.getElementById('piece-form-section').style.display = 'none';
+    document.getElementById('add-piece-button-section').style.display = 'block';
+    resetPieceForm();
+}
+
+
 function editPieceForm(pieceId) {
     const piece = getPiece(pieceId);
     if (piece) {
+        showPieceFormSection();
         document.getElementById('piece-id').value = piece.id;
         document.getElementById('piece-title').value = piece.titre;
         document.getElementById('piece-composer').value = piece.compositeur || '';
         document.getElementById('piece-style').value = piece.style || '';
-        document.getElementById('piece-tempo').value = piece.tempo || '';
-        // **Partition**:  Réfléchir à comment gérer l'affichage/modification du nom de fichier de partition si nécessaire.
-        document.getElementById('cancel-piece-form').style.display = 'inline-block'; // Afficher le bouton annuler
-        document.getElementById('piece-form-section').scrollIntoView({behavior: 'smooth'}); // Faire défiler vers le formulaire
+        document.getElementById('piece-reference-link').value = piece.referenceLink || '';
+        document.getElementById('cancel-piece-form').style.display = 'inline-block';
+        document.getElementById('piece-form-section').scrollIntoView({behavior: 'smooth'});
     }
 }
 
@@ -67,16 +81,16 @@ function editPieceForm(pieceId) {
 function deleteConfirmation(pieceId) {
     if (confirm("Êtes-vous sûr de vouloir supprimer ce morceau ?")) {
         deletePiece(pieceId);
-        loadPieceList(); // Recharger la liste après suppression
+        loadPieceList();
     }
 }
 
 function showRepetitionNotesSection(pieceId) {
     const piece = getPiece(pieceId);
     if (piece) {
-        document.getElementById('piece-id').value = pieceId; // Stocker temporairement l'ID du morceau dans le formulaire de notes
+        document.getElementById('piece-id').value = pieceId;
         document.getElementById('notes-piece-title').textContent = piece.titre;
-        document.getElementById('repetition-notes').value = getRepetitionNotesText(piece.notes); // Fonction à implémenter pour formater les notes
+        document.getElementById('repetition-notes').value = getRepetitionNotesText(piece.notes);
         document.getElementById('repetition-notes-section').style.display = 'block';
         document.getElementById('repetition-notes-section').scrollIntoView({behavior: 'smooth'});
     }
