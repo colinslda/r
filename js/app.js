@@ -14,10 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const cancelPieceFormButton = document.getElementById('cancel-piece-form');
     cancelPieceFormButton.addEventListener('click', hidePieceFormSection);
 
-    // Événements pour la liste des morceaux (tri)
-    document.getElementById('sort-by-title').addEventListener('click', () => sortPieceList('title'));
-    document.getElementById('sort-by-composer').addEventListener('click', () => sortPieceList('composer'));
-    document.getElementById('sort-by-style').addEventListener('click', () => sortPieceList('style'));
 
     // Événements pour la section des notes de répétition
     document.getElementById('save-notes').addEventListener('click', saveRepetitionNotes);
@@ -46,21 +42,17 @@ function handlePieceFormSubmit(event) {
     const pieceId = document.getElementById('piece-id').value;
     const title = document.getElementById('piece-title').value;
     const composer = document.getElementById('piece-composer').value;
-    const style = document.getElementById('piece-style').value;
-    const customStyleInput = document.getElementById('custom-style');
-    const customStyle = customStyleInput.value.trim();
+    const category = document.getElementById('piece-category').value; // CHANGEMENT : Récupérer la catégorie
     const referenceLink = document.getElementById('piece-reference-link').value;
+
 
     if (!title) {
         alert('Le titre du morceau est obligatoire.');
         return;
     }
 
-    let finalStyle = style;
-    if (style === 'Autre' && customStyle) {
-        finalStyle = customStyle;
-    } else if (style === 'Autre' && !customStyle) {
-        alert('Veuillez spécifier un style personnalisé si "Autre" est sélectionné.');
+    if (!category) { // AJOUT : Validation de la catégorie obligatoire
+        alert('Veuillez sélectionner une catégorie pour l\'œuvre.');
         return;
     }
 
@@ -69,7 +61,7 @@ function handlePieceFormSubmit(event) {
         id: pieceId || generateUniqueId(),
         titre: title,
         compositeur: composer,
-        style: finalStyle,
+        category: category, // CHANGEMENT : Utiliser la catégorie
         referenceLink: referenceLink,
         notes: []
     };
@@ -89,35 +81,21 @@ function resetPieceForm() {
     document.getElementById('piece-id').value = '';
     document.getElementById('piece-title').value = '';
     document.getElementById('piece-composer').value = '';
-    document.getElementById('piece-style').value = '';
-    document.getElementById('custom-style').value = '';
+    document.getElementById('piece-category').value = ''; // CHANGEMENT : Reset catégorie
     document.getElementById('piece-reference-link').value = '';
-    document.getElementById('custom-style').style.display = 'none';
     document.getElementById('cancel-piece-form').style.display = 'none';
 }
 
 function loadPieceList() {
     const pieceList = getAllPieces();
-    displayPieceList(pieceList);
+    displayPieceListByCategory(pieceList); // CHANGEMENT : Utiliser displayPieceListByCategory
 }
 
 
-function sortPieceList(sortBy) {
-    const pieceList = getAllPieces();
-    let sortedList;
-
-    if (sortBy === 'title') {
-        sortedList = pieceList.sort((a, b) => a.titre.localeCompare(b.titre));
-    } else if (sortBy === 'composer') {
-        sortedList = pieceList.sort((a, b) => (a.compositeur || '').localeCompare(b.compositeur || ''));
-    } else if (sortBy === 'style') {
-        sortedList = pieceList.sort((a, b) => (a.style || '').localeCompare(b.style || ''));
-    } else {
-        return; // Tri non reconnu
-    }
-
-    displayPieceList(sortedList);
-}
+// SUPPRESSION DE LA FONCTION sortPieceList - plus nécessaire avec les catégories
+/*
+function sortPieceList(sortBy) { ... }
+*/
 
 
 function saveRepetitionNotes() {
