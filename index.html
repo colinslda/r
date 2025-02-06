@@ -17,8 +17,10 @@
 
     <main>
         <section id="ajout-morceau">
-            <h2>Ajouter / Modifier un morceau</h2> <form id="form-morceau">
-                <input type="hidden" id="morceau-index" name="morceau-index" value="-1"> <div class="input-group">
+            <h2>Ajouter / Modifier un morceau</h2>
+            <form id="form-morceau">
+                <input type="hidden" id="morceau-index" name="morceau-index" value="-1">
+                <div class="input-group">
                     <label for="titre">Titre:</label>
                     <input type="text" id="titre" name="titre" required>
                 </div>
@@ -57,9 +59,10 @@
         </section>
 
         <section id="notes-repetition" class="hidden">
-            <h2>Notes de répétition</h2>
+            <h2 id="notes-titre-morceau">Notes de répétition pour [Nom du morceau]</h2>
             <textarea id="notes" placeholder="Ajouter des notes sur la répétition..."></textarea>
             <button id="btn-sauvegarder-notes" class="btn-sauvegarder">Sauvegarder les notes</button>
+            <button id="btn-retour-liste" class="btn-annuler hidden">Retour à la liste des morceaux</button>
         </section>
     </main>
 
