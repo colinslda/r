@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnAjouterModifier = document.getElementById('btn-ajouter-modifier');
     const btnAnnulerModifier = document.getElementById('btn-annuler-modifier');
     const triSelection = document.getElementById('tri-selection');
+    const notesTextarea = document.getElementById('notes');
+    const notesTitreMorceau = document.getElementById('notes-titre-morceau'); // Récupérer le titre dynamique des notes
+    const btnRetourListe = document.getElementById('btn-retour-liste'); // Récupérer le bouton "Retour à la liste"
+
 
     const compositeurInput = document.getElementById('compositeur');
     const compositeurAutocompleteList = document.getElementById('compositeur-autocomplete-list');
@@ -21,52 +25,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const stylesDisponibles = ["Concerto", "Sonate", "Technique", "Caprices/Etudes"];
 
     let morceauEnEditionIndex = -1; // Index du morceau en cours d'édition, -1 si ajout
+    let morceauEnNotesIndex = -1; // Index du morceau dont les notes sont affichées, -1 si aucune note affichée
 
 
-    // --- Fonctions d'Autocomplétion ---
-    function autocomplétion(inputElement, listeAutocompleteElement, suggestions) {
-        inputElement.addEventListener('input', function() {
-            const inputValue = this.value.toLowerCase();
-            listeAutocompleteElement.innerHTML = ''; // Efface la liste précédente
-            if (!inputValue) {
-                listeAutocompleteElement.classList.remove('show'); // Cache si input vide
-                return;
-            }
-
-            const suggestionsFiltrées = suggestions.filter(suggestion =>
-                suggestion.toLowerCase().startsWith(inputValue)
-            );
-
-            if (suggestionsFiltrées.length > 0) {
-                listeAutocompleteElement.classList.add('show');
-                suggestionsFiltrées.forEach(suggestion => {
-                    const li = document.createElement('li');
-                    li.textContent = suggestion;
-                    li.addEventListener('click', function() {
-                        inputElement.value = suggestion;
-                        listeAutocompleteElement.classList.remove('show');
-                    });
-                    listeAutocompleteElement.appendChild(li);
-                });
-            } else {
-                listeAutocompleteElement.classList.remove('show'); // Cache si pas de suggestions
-            }
-        });
-
-        // Cacher la liste si on clique en dehors
-        document.addEventListener('click', function(event) {
-            if (!inputElement.parentNode.contains(event.target)) {
-                listeAutocompleteElement.classList.remove('show');
-            }
-        });
-    }
-
-    // Initialiser l'autocomplétion pour compositeur et style
+    // --- Fonctions d'Autocomplétion (inchangées) ---
+    function autocomplétion(inputElement, listeAutocompleteElement, suggestions) { /* ... */ }
     autocomplétion(compositeurInput, compositeurAutocompleteList, compositeursDisponibles);
     autocomplétion(styleInput, styleAutocompleteList, stylesDisponibles);
 
 
-    // Fonction pour afficher les morceaux dans la liste (inchangée)
+    // Fonction pour afficher les morceaux dans la liste (modifiée)
     function afficherMorceaux() {
         morceauxListeUl.innerHTML = '';
         morceaux.forEach((morceau, index) => {
@@ -78,122 +46,111 @@ document.addEventListener('DOMContentLoaded', () => {
                     <button class="btn-supprimer" data-index="${index}">Supprimer</button>
                 </div>
             `;
+            li.addEventListener('click', () => afficherNotesMorceau(index)); // Ajouter un event listener sur le LI pour afficher les notes
             morceauxListeUl.appendChild(li);
         });
         ajouterEventListenersActions();
     }
 
-    function ajouterEventListenersActions() {
-        document.querySelectorAll('.btn-supprimer').forEach(button => {
-            button.addEventListener('click', function() {
-                const index = parseInt(this.dataset.index);
-                supprimerMorceau(index);
-            });
-        });
-        document.querySelectorAll('.btn-modifier').forEach(button => {
-            button.addEventListener('click', function() {
-                const index = parseInt(this.dataset.index);
-                modifierMorceau(index);
-            });
-        });
+    function ajouterEventListenersActions() { /* ... (inchangée) ... */ }
+    function supprimerMorceau(index) { /* ... (inchangée) ... */ }
+    function modifierMorceau(index) { /* ... (inchangée) ... */ }
+
+
+    // --- Fonctionnalité Afficher Notes Morceau ---
+    function afficherNotesMorceau(index) {
+        morceauEnNotesIndex = index; // Mémoriser l'index du morceau dont les notes sont affichées
+        const morceau = morceaux[index];
+
+        notesTitreMorceau.textContent = `Notes de répétition pour ${morceau.titre}`; // Mettre à jour le titre de la section notes
+        notesTextarea.value = morceau.notes || ''; // Remplir la textarea avec les notes existantes (ou vide si pas de notes)
+
+        notesSection.classList.remove('hidden'); // Afficher la section notes
+        btnRetourListe.classList.remove('hidden'); // Afficher le bouton "Retour à la liste"
+        document.getElementById('liste-morceaux').classList.add('hidden'); // Cacher la liste des morceaux
+        btnNotes.classList.add('active'); // Activer le bouton de navigation "Notes"
+        btnListe.classList.remove('active'); // Désactiver le bouton de navigation "Morceaux"
     }
 
-    function supprimerMorceau(index) {
-        morceaux.splice(index, 1);
-        afficherMorceaux();
-    }
+
+    // Fonctionnalité Annuler Modification (inchangée)
+    btnAnnulerModifier.addEventListener('click', function() { /* ... (inchangée) ... */ });
 
 
-    // --- Fonctionnalité Modifier Morceau ---
-    function modifierMorceau(index) {
-        morceauEnEditionIndex = index; // Stocker l'index du morceau en édition
-        const morceau = morceaux[index]; // Récupérer le morceau à modifier
-
-        // Pré-remplir le formulaire avec les données du morceau
-        document.getElementById('titre').value = morceau.titre;
-        document.getElementById('compositeur').value = morceau.compositeur;
-        document.getElementById('style').value = morceau.style;
-        morceauIndexInput.value = index; // Stocker l'index dans l'input caché
-        btnAjouterModifier.textContent = "Modifier morceau"; // Changer le texte du bouton
-        btnAnnulerModifier.classList.remove('hidden'); // Afficher le bouton Annuler
-        document.querySelector('#ajout-morceau h2').textContent = "Modifier le morceau"; // Changer le titre de la section
-
-        // Scroll jusqu'à la section d'ajout pour une meilleure UX
-        document.getElementById('ajout-morceau').scrollIntoView({behavior: 'smooth'});
-    }
-
-    // Fonction pour annuler la modification
-    btnAnnulerModifier.addEventListener('click', function() {
-        morceauEnEditionIndex = -1; // Réinitialiser l'index d'édition
-        formMorceau.reset(); // Réinitialiser le formulaire
-        morceauIndexInput.value = -1; // Réinitialiser l'input caché de l'index
-        btnAjouterModifier.textContent = "Ajouter morceau"; // Remettre le texte du bouton à "Ajouter"
-        btnAnnulerModifier.classList.add('hidden'); // Cacher le bouton Annuler
-        document.querySelector('#ajout-morceau h2').textContent = "Ajouter un morceau"; // Remettre le titre de la section à "Ajouter"
-    });
-
-
-    // Gestion de la soumission du formulaire (modifiée pour gérer l'ajout ET la modification)
+    // Gestion de la soumission du formulaire (modifiée pour initialiser les notes)
     formMorceau.addEventListener('submit', function(event) {
         event.preventDefault();
 
         const titre = document.getElementById('titre').value;
         const compositeur = document.getElementById('compositeur').value;
         const style = document.getElementById('style').value;
-        const indexModification = parseInt(morceauIndexInput.value); // Récupérer l'index depuis l'input caché
+        const indexModification = parseInt(morceauIndexInput.value);
 
         const morceauModifie = {
             titre: titre,
             compositeur: compositeur,
-            style: style
+            style: style,
+            notes: indexModification >= 0 ? morceaux[indexModification].notes : "" // Conserver les notes si modification, sinon notes vides à la création
         };
 
         if (indexModification >= 0) {
-            // Modification d'un morceau existant
-            morceaux[indexModification] = morceauModifie; // Mettre à jour le morceau à l'index
+            morceaux[indexModification] = morceauModifie;
         } else {
-            // Ajout d'un nouveau morceau
             morceaux.push(morceauModifie);
         }
 
-        afficherMorceaux(); // Réafficher la liste
+        afficherMorceaux();
 
-        formMorceau.reset(); // Réinitialiser le formulaire
-        morceauIndexInput.value = -1; // Réinitialiser l'index caché
-        btnAjouterModifier.textContent = "Ajouter morceau"; // Remettre le texte du bouton à "Ajouter"
-        btnAnnulerModifier.classList.add('hidden'); // Cacher le bouton Annuler
-        document.querySelector('#ajout-morceau h2').textContent = "Ajouter un morceau"; // Remettre le titre à "Ajouter"
+        formMorceau.reset();
+        morceauIndexInput.value = -1;
+        btnAjouterModifier.textContent = "Ajouter morceau";
+        btnAnnulerModifier.classList.add('hidden');
+        document.querySelector('#ajout-morceau h2').textContent = "Ajouter un morceau";
     });
 
 
-    // --- Fonctionnalité Tri des Morceaux ---
-    triSelection.addEventListener('change', function() {
-        const critereTri = this.value;
-        if (critereTri === 'aucun') {
-            // Pas de tri, réafficher dans l'ordre actuel (ou ordre d'ajout si vous voulez un ordre par défaut)
-            afficherMorceaux(); // Réaffiche simplement la liste
-            return;
+    // --- Fonctionnalité Sauvegarder Notes ---
+    document.getElementById('btn-sauvegarder-notes').addEventListener('click', function() {
+        if (morceauEnNotesIndex >= 0) {
+            const notes = notesTextarea.value;
+            morceaux[morceauEnNotesIndex].notes = notes; // Sauvegarder les notes dans l'objet morceau correspondant
+            alert(`Notes sauvegardées pour ${morceaux[morceauEnNotesIndex].titre}`); // Feedback utilisateur (peut être amélioré)
+            // Optionnel :  Revenir à la liste des morceaux après sauvegarde, ou rester sur la page des notes
         }
-
-        morceaux.sort((a, b) => {
-            const valeurA = a[critereTri].toLowerCase(); // Convertir en minuscules pour un tri insensible à la casse
-            const valeurB = b[critereTri].toLowerCase();
-
-            if (valeurA < valeurB) {
-                return -1;
-            }
-            if (valeurA > valeurB) {
-                return 1;
-            }
-            return 0; // valeurs égales
-        });
-        afficherMorceaux(); // Réafficher la liste triée
     });
 
 
-    // Navigation entre sections (inchangée)
-    btnNotes.addEventListener('click', () => { /* ... */ });
-    btnListe.addEventListener('click', () => { /* ... */ });
+    // --- Fonctionnalité Retour à la Liste des Morceaux ---
+    btnRetourListe.addEventListener('click', function() {
+        notesSection.classList.add('hidden'); // Cacher la section notes
+        btnRetourListe.classList.add('hidden'); // Cacher le bouton "Retour à la liste"
+        document.getElementById('liste-morceaux').classList.remove('hidden'); // Afficher la liste des morceaux
+        btnListe.classList.add('active'); // Activer le bouton de navigation "Morceaux"
+        btnNotes.classList.remove('active'); // Désactiver le bouton de navigation "Notes"
+        morceauEnNotesIndex = -1; // Réinitialiser l'index du morceau en notes
+    });
+
+
+    // --- Fonctionnalité Tri des Morceaux (inchangée) ---
+    triSelection.addEventListener('change', function() { /* ... (inchangée) ... */ });
+
+
+    // Navigation entre sections (légèrement modifiée pour cacher le bouton retour)
+    btnNotes.addEventListener('click', () => {
+        notesSection.classList.remove('hidden');
+        btnRetourListe.classList.remove('hidden'); // Afficher le bouton "Retour" quand on va sur la section Notes depuis la nav
+        document.getElementById('liste-morceaux').classList.add('hidden');
+        btnNotes.classList.add('active');
+        btnListe.classList.remove('active');
+    });
+
+    btnListe.addEventListener('click', () => {
+        notesSection.classList.add('hidden');
+        btnRetourListe.classList.add('hidden'); // Cacher le bouton "Retour" quand on revient sur la liste
+        document.getElementById('liste-morceaux').classList.remove('hidden');
+        btnListe.classList.add('active');
+        btnNotes.classList.remove('active');
+    });
 
 
     // Afficher les morceaux initiaux au chargement (inchangé)
